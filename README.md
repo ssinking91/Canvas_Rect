@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+## 🔥 HTMLCanvasElement.getContext()
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
 
-## Available Scripts
+- HTMLCanvasElement.getContext() 메소드는 캔버스의 드로잉 컨텍스트를 반환
 
-In the project directory, you can run:
+<br/>
 
-### `yarn start`
+```javascript
+var ctx = canvas.getContext(contextType);
+var ctx = canvas.getContext(contextType, contextAttributes);
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 👉 contextType
+  캔버스에 연관된 드로잉 컨텍스트를 정의하는 컨텍스트 식별자를 갖는 DOMString입니다. 가능한 값은 다음과 같습니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  - "2d", 2차원 렌더링 컨텍스트를 나타내는 CanvasRenderingContext2D (en-US) 객체를 생성하게 합니다.
 
-### `yarn test`
+    <br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 👉 contextAttributes
+  렌더링 컨텍스트를 생성할 때 몇 가지 컨텍스트 속성을 사용할 수 있습니다.
 
-### `yarn build`
+ <br/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔥 캔버스(canvas)를 이용한 도형 그리기
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+fillRect(x, y, width, height)
+색칠된 직사각형을 그립니다.
 
-### `yarn eject`
+strokeRect(x, y, width, height)
+직사각형 윤곽선을 그립니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+clearRect(x, y, width, height)
+특정 부분을 지우는 직사각형이며, 이 지워진 부분은 완전히 투명해집니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br/>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 👉 직사각형 도형 예제
+  <br/>
 
-## Learn More
+```javascript
+function draw() {
+  var canvas = document.getElementById("canvas");
+  if (canvas.getContext) {
+    var ctx = canvas.getContext("2d");
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ctx.fillRect(25, 25, 100, 100);
+    ctx.clearRect(45, 45, 60, 60);
+    ctx.strokeRect(50, 50, 50, 50);
+  }
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
 
-### Code Splitting
+## 🔥 스타일과 색 적용하기
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br/>
 
-### Analyzing the Bundle Size
+- 👉 도형에 색을 적용하고자 하면, fillStyle과 strokeStyle 두 가지 중요한 속성을 사용할 수 있습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<br/>
 
-### Making a Progressive Web App
+```javascript
+fillStyle = color
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+도형을 채우는 색을 설정합니다.
 
-### Advanced Configuration
+strokeStyle = color
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+도형의 윤곽선 색을 설정합니다.
+```
 
-### Deployment
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🔥 텍스트 그리기
 
-### `yarn build` fails to minify
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 👉 캔버스 렌더링 컨텍스트(canvas rendering context)는 텍스트를 렌더링하는 두 가지 방법을 제공
+
+<br/>
+
+```javascript
+fillText(text, x, y [, maxWidth])
+
+주어진 (x, y) 위치에 주어진 텍스트를 채웁니다. 최대 폭(width)은 옵션 값 입니다.
+
+strokeText(text, x, y [, maxWidth])
+
+주어진 (x, y) 위치에 주어진 텍스트를 칠(stroke)합니다. 최대 폭(width)은 옵션 값 입니다.
+```
+
+<br/>
+
+- 👉 fillText 예제 : 텍스트는 현재의 fillStyle을 사용하여 채워집니다.
+  <br/>
+
+```javascript
+function draw() {
+  var ctx = document.getElementById("canvas").getContext("2d");
+  ctx.font = "48px serif";
+  ctx.fillText("Hello world", 10, 50);
+}
+```
+
+<br/>
+
+- 👉 strokeText 예제 : 텍스트는 현재의 strokeStyle을 이용하여 채워집니다.
+  <br/>
+
+```javascript
+function draw() {
+  var ctx = document.getElementById("canvas").getContext("2d");
+  ctx.font = "48px serif";
+  ctx.strokeText("Hello world", 10, 50);
+}
+```
