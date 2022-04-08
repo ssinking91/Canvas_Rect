@@ -1,3 +1,13 @@
+## 🛠 기능 시연 
+
+<br/>
+
+<div align="center">
+    <img width="500px" height="300px" src="https://user-images.githubusercontent.com/89959952/162361960-17350994-aa51-4a00-ba52-06887a10d2ad.gif"/>
+</div>
+
+<br/>
+
 ## 🔥 HTMLCanvasElement.getContext()
 
 <br/>
